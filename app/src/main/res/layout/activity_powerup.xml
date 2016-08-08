@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.anshul.pokemongopokedex.Powerup"
+    android:background="#354AA5"
+    android:clipChildren="true">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/Image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentTop="true"/>
+
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBarCap"
+        android:layout_below="@+id/Image" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBarCP"
+        android:layout_below="@+id/Image" />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MAX CP"
+                android:id="@+id/maxcp"
+                android:gravity="center"
+                android:textSize="10dp"
+                android:textColor="#ffffff"
+                android:layout_below="@+id/progressBarCP"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="1dp"
+
+                />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:text="Trainer Level"
+        android:id="@+id/TrainerLevel"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/Image"
+        android:textColor="#C1FFFFFF" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/setLevel"
+        android:layout_below="@+id/TrainerLevel"
+        android:layout_alignParentEnd="true">
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:text="-"
+            android:textSize="50dp"
+            android:layout_margin="20dp"
+            android:id="@+id/buttonDown"
+            android:background="@drawable/circle"
+            android:textColor="#FFFFFFFF"
+            />
+
+        <EditText
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:textSize="50dp"
+            android:id="@+id/levelValue"
+            android:layout_marginTop="10dp"
+            android:layout_margin="20dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="#FFFFFFFF"
+            android:textAlignment="gravity"
+            android:gravity="center"
+            android:cursorVisible="false"
+            android:background="@android:color/transparent"
+            android:inputType="number"/>
+
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:text="+"
+            android:textSize="50dp"
+            android:layout_margin="20dp"
+            android:id="@+id/buttonUp"
+            android:background="@drawable/circle"
+            android:textColor="#FFFFFFFF" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Current CP"
+        android:id="@+id/currCp"
+        android:layout_below="@+id/setLevel"
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#C1FFFFFF" />
+
+    <EditText
+        android:layout_width="600dp"
+        android:layout_height="50dp"
+        android:id="@+id/cpVal"
+        android:text="0"
+        android:textSize="30dp"
+        android:layout_below="@+id/currCp"
+        android:layout_alignEnd="@+id/setLevel"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFFFF"
+        android:textAlignment="gravity"
+        android:gravity="center"
+        android:cursorVisible="false"
+        android:background="@drawable/cpval"
+        android:inputType="number"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/cpVal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/cpval">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/maxlay">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Max CP"
+                android:id="@+id/maxcpplace"
+                android:layout_below="@+id/setLevel"
+                android:layout_centerHorizontal="true"
+                android:textSize="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#C1FFFFFF" />
+
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/maxcpval"
+                android:layout_below="@+id/setLevel"
+                android:layout_centerHorizontal="true"
+                android:textSize="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#FFFFFFFF" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/maxlay"
+            android:id="@+id/levcaplay">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Level Cap"
+                android:id="@+id/levcapplace"
+                android:layout_below="@+id/setLevel"
+                android:layout_centerHorizontal="true"
+                android:textSize="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#C1FFFFFF" />
+
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/levcapval"
+                android:layout_below="@+id/setLevel"
+                android:layout_centerHorizontal="true"
+                android:textSize="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#FFFFFFFF" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/levcaplay"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="CP Per Level Up"
+                android:id="@+id/perlevplace"
+                android:layout_below="@+id/setLevel"
+                android:layout_centerHorizontal="true"
+                android:textSize="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#C1FFFFFF" />
+
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/perlevval"
+                android:layout_below="@+id/setLevel"
+                android:layout_centerHorizontal="true"
+                android:textSize="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#FFFFFFFF" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Pokemon go Pokedex</string>
+    <string name="title_activity_evolution">Evolution</string>
+    <string name="title_activity_powerup">Powerup</string>
+</resources>
