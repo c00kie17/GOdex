@@ -3,13 +3,16 @@ package com.anshul.pokemongopokedex;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.media.Image;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -32,7 +37,6 @@ import java.util.Collections;
 
 public class details extends AppCompatActivity {
     public JSONObject pokemonInfo;
-    public JSONObject pokeDetail;
     public String TypeI;
     public String TypeII;
     public JSONArray weakness;
@@ -42,8 +46,12 @@ public class details extends AppCompatActivity {
     public ArrayList<Integer> Evolutions =new ArrayList<Integer>();
     public int highlight;
     public String color;
+    public Integer PriCol;
+    public Integer SecCol;
+    public Integer TextCol;
     public JSONArray prevevoldata;
     public JSONArray nextevoldata;
+    public String Egg;
     public boolean notAvail = true;
     Context context = this;
 
@@ -61,6 +69,7 @@ public class details extends AppCompatActivity {
         LinearLayout LinlayoutFC = (LinearLayout) findViewById(R.id.fleec);
         LinearLayout LinlayoutEvol = (LinearLayout) findViewById(R.id.evol);
         LinearLayout LinlayoutCalc = (LinearLayout) findViewById(R.id.calc);
+        LinearLayout Linlayoutegg = (LinearLayout) findViewById(R.id.egg);
         ScrollView scroll = (ScrollView)findViewById(R.id.scrollView);
         Bundle extras = getIntent().getExtras();
         final int position = extras.getInt("MyData");
@@ -68,10 +77,17 @@ public class details extends AppCompatActivity {
         scroll.scrollTo(0, scroll.getTop());
 
         try {
-            JSONArray obj = new JSONArray(loadJSONFromAsset("pokemon.json"));
+            JSONArray obj = new JSONArray(loadJSONFromAsset("Poke.json"));
             pokemonInfo = obj.getJSONObject(position);
             weakness = pokemonInfo.getJSONArray("Weaknesses");
             attacks = pokemonInfo.getJSONArray("Fast Attack(s)");
+            Egg = pokemonInfo.getString("pokeegg");
+            String PriCols = pokemonInfo.getString("primaryColor");
+            PriCol = Color.parseColor(PriCols);
+            String SecCols = pokemonInfo.getString("secondaryColor");
+            SecCol = Color.parseColor(SecCols);
+            String TextCols = pokemonInfo.getString("textColor");
+            TextCol = Color.parseColor(TextCols);
             JSONArray data = pokemonInfo.getJSONArray("Type I");
             TypeI = data.getString(0);
             if(pokemonInfo.has("Type II")){
@@ -99,19 +115,15 @@ public class details extends AppCompatActivity {
             }
            Evolutions.add(position+1);
 
-            JSONArray obj1 = new JSONArray(loadJSONFromAsset("pokejson2.json"));
-            for(int i=0;i<obj1.length();i++){
-                JSONObject insideObj = obj1.getJSONObject(i);
-                if(insideObj.getInt("PkMn") == position+1){
-                    pokeDetail = insideObj;
-                }
-            }
 
-            CaptureRate = pokeDetail.getDouble("BaseCaptureRate");
-            FleeRate = pokeDetail.getDouble("BaseFleeRate");
+            CaptureRate = pokemonInfo.getDouble("BaseCaptureRate");
+            FleeRate = pokemonInfo.getDouble("BaseFleeRate");
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        layout.setBackgroundColor(PriCol);
+
 
         int checker;
         if(TypeII == null){
@@ -170,7 +182,10 @@ public class details extends AppCompatActivity {
                 LinlayoutAttack.setGravity(Gravity.CENTER_HORIZONTAL);
                 attacking.setLayoutParams(layoutParams);
                 attacking.setText(attackValue);
-                attacking.setBackgroundResource(R.drawable.roundsmall);
+                attacking.setTextColor(TextCol);
+                GradientDrawable drawable = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP,new int[]{SecCol,SecCol});
+                drawable.setCornerRadius(3);
+                attacking.setBackground(drawable);
                 LinlayoutAttack.addView(attacking);
             }
         }
@@ -187,8 +202,9 @@ public class details extends AppCompatActivity {
             if(i<highlight) {
                 shape.setColor(Color.parseColor(color));
             }
-            else{
-                shape.setColor(Color.parseColor("#1A237E"));
+            else {
+                shape.setColor(SecCol);
+
             }
             Cap.setBackground(shape);
             Cap.setLayoutParams(layoutParams);
@@ -196,7 +212,7 @@ public class details extends AppCompatActivity {
         }
 
         getLightUpCF(FleeRate);
-        for(int i=0;i<6;i++){
+        for(int i=0;i<12;i++){
             ImageView Cap = new ImageView(this);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(20, 10,1.0f);
             LinlayoutFC.setGravity(Gravity.TOP | Gravity.LEFT);
@@ -207,7 +223,7 @@ public class details extends AppCompatActivity {
                 shape.setColor(Color.parseColor(color));
             }
             else{
-                shape.setColor(Color.parseColor("#1A237E"));
+                shape.setColor(SecCol);
             }
             Cap.setBackground(shape);
             Cap.setLayoutParams(layoutParams);
@@ -224,7 +240,7 @@ public class details extends AppCompatActivity {
             GradientDrawable shape =  new GradientDrawable();
             if(position == Evolutions.get(i)-1){
                 shape.setCornerRadius( 7 );
-                shape.setColor(Color.parseColor("#1A237E"));
+                shape.setColor(SecCol);
             }
             image.setBackground(shape);
             LinlayoutEvol.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL);
@@ -247,18 +263,38 @@ public class details extends AppCompatActivity {
 
         int calcValue;
         if(notAvail == true){
-           calcValue = 1;
+           calcValue = 2;
         }
         else{
-            calcValue = 2;
+            calcValue = 3;
         }
         for(int i=0;i<calcValue;i++){
-            Button but = new Button(this);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(250, 150);
+            final Button but = new Button(this);
+            but.setTextSize(10);
+            Typeface typeFace= Typeface.createFromAsset(getAssets(),"fonts/aba.ttf");
+            GradientDrawable drawableback = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP,new int[]{SecCol,SecCol});
+            drawableback.setCornerRadius(5);
+            but.setBackground(drawableback);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(150, 100);
             layoutParams.setMargins (15,15,15,15);
             LinlayoutCalc.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL);
             if(i == 0){
-                but.setBackgroundResource(R.drawable.powerup);
+                but.setText("ATTACK CHECKER");
+                but.setTextColor(TextCol);
+                but.setTypeface(typeFace);
+                but.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(details.this, attacks.class);
+                        intent.putExtra("MyData", position);
+                        startActivity(intent);
+                    }
+                });
+
+            }else if(i==1){
+                but.setText("POWER UP CALCULATOR");
+                but.setTextColor(TextCol);
+                but.setTypeface(typeFace);
                 but.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
@@ -267,9 +303,11 @@ public class details extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-
-            }else{
-                but.setBackgroundResource(R.drawable.evolup);
+            }
+            else{
+                but.setText("EVOLUTION MULTIPLIER");
+                but.setTextColor(TextCol);
+                but.setTypeface(typeFace);
                 but.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
@@ -286,11 +324,27 @@ public class details extends AppCompatActivity {
                     }
                 });
             }
+
             but.setLayoutParams(layoutParams);
             LinlayoutCalc.addView(but);
         }
-
-
+        Log.d("val",Egg);
+        if(!Egg.isEmpty()){
+            ImageView eggimg = new ImageView(this);
+            TextView eggval = new TextView(this);
+            LinearLayout.LayoutParams layoutParamsval = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(60, 60);
+            Linlayoutegg.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL);
+            GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(eggimg);
+            Glide.with(this).load(R.mipmap.egg).into(imageViewTarget);
+            eggval.setText(Egg+"Km");
+            eggval.setTextColor(TextCol);
+            eggval.setTextSize(30);
+            eggimg.setLayoutParams(layoutParams);
+            eggval.setLayoutParams(layoutParamsval);
+            Linlayoutegg.addView(eggimg);
+            Linlayoutegg.addView(eggval);
+        }
 
 
 
@@ -299,11 +353,32 @@ public class details extends AppCompatActivity {
         TextView Name = (TextView) findViewById(R.id.pokeName);
         TextView Id = (TextView) findViewById(R.id.pokeId);
         TextView type = (TextView) findViewById(R.id.pokeType);
+        TextView weaknesses = (TextView) findViewById(R.id.weaknesses);
+        TextView attacks = (TextView) findViewById(R.id.attacks);
+        TextView  CC = (TextView) findViewById(R.id.CC);
+        TextView  FC= (TextView) findViewById(R.id.FC);
+
+        GradientDrawable drawable = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP,new int[]{SecCol,SecCol});
+        drawable.setCornerRadius(3);
+        type.setBackground(drawable);
+
+        Name.setTextColor(TextCol);
+        Id.setTextColor(TextCol);
+        type.setTextColor(TextCol);
+        weaknesses.setTextColor(TextCol);
+        attacks.setTextColor(TextCol);
+        CC.setTextColor(TextCol);
+        FC.setTextColor(TextCol);
+        weaknesses.setAlpha(0.7f);
+        attacks.setAlpha(0.7f);
+        CC.setAlpha(0.7f);
+        FC.setAlpha(0.7f);
+
 
         try {
             Name.setText(pokemonInfo.getString("Name"));
             type.setText(pokemonInfo.getString("Classification"));
-            Id.setText("#" + pokemonInfo.getString("Number"));
+            Id.setText("#" + pokemonInfo.getString("number"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -463,27 +538,27 @@ public class details extends AppCompatActivity {
 
     public void getLightUpCF(double value){
         if (value > 0.98) {
-            highlight = 6;
+            highlight = 12;
             color = "#FF0000";
         }
         else if (value > 0.19) {
-            highlight = 5;
+            highlight = 10;
             color = "#FF0000";
         }
         else if (value > 0.14) {
-            highlight = 4;
+            highlight = 8;
             color = "#FF9900";
         }
         else if (value > 0.091) {
-            highlight = 3;
+            highlight = 6;
             color = "#FF9900";
         }
         else if (value > 0.08) {
-            highlight = 2;
+            highlight = 4;
             color = "#00E500";
         }
         else {
-            highlight = 1;
+            highlight = 2;
             color = "#00E500";
         }
     }

@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,9 @@ public class Powerup extends AppCompatActivity {
     public Integer maxCP;
     public double LevelCap;
     public Integer cpPerlevelup;
+    public Integer PriCol;
+    public Integer SecCol;
+    public Integer TextCol;
     Context context = this;
 
 
@@ -55,6 +59,9 @@ public class Powerup extends AppCompatActivity {
         SharedPreferences settings = getSharedPreferences("level",Activity.MODE_PRIVATE);
         Level = settings.getInt("Level",0);
 
+
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.power);
+        LinearLayout infolay = (LinearLayout)findViewById(R.id.info);
         final LinearLayout LinLayoutlev = (LinearLayout) findViewById(R.id.setLevel);
         Bundle extras = getIntent().getExtras();
         final int position = extras.getInt("MyData");
@@ -62,28 +69,30 @@ public class Powerup extends AppCompatActivity {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         try{
-            JSONArray obj1 = new JSONArray(loadJSONFromAsset("pokejson2.json"));
-            for(int i=0;i<obj1.length();i++){
-                JSONObject insideObj = obj1.getJSONObject(i);
-                if(insideObj.getInt("PkMn") == position+1){
-                    pokeDetail = insideObj;
-                }
-            }
+            JSONArray obj1 = new JSONArray(loadJSONFromAsset("Poke.json"));
+            pokeDetail = obj1.getJSONObject(position);
 
-            JSONArray obj3 = new JSONArray(loadJSONFromAsset("pokelevel.json"));
-            JSONObject levupobj= obj3.getJSONObject(position);
-            cpPerlevelup = levupobj.getInt("powerup");
+            cpPerlevelup = pokeDetail.getInt("powerup");
             maxCP = pokeDetail.getInt("MaxCP");
             JSONArray obj2 = new JSONArray(loadJSONFromAsset("pokecap.json"));
             JSONObject capObj= obj2.getJSONObject(Level-1);
             LevelCap = capObj.getDouble("cap");
+            String PriCols = pokeDetail.getString("primaryColor");
+            PriCol = Color.parseColor(PriCols);
+            String SecCols = pokeDetail.getString("secondaryColor");
+            SecCol = Color.parseColor(SecCols);
+            String TextCols = pokeDetail.getString("textColor");
+            TextCol = Color.parseColor(TextCols);
 
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        GradientDrawable infodraw = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP,new int[]{SecCol,SecCol});
+        infodraw.setCornerRadius(3);
+        infolay.setBackground(infodraw);
+        layout.setBackgroundColor(PriCol);
         ImageView image = (ImageView)findViewById(R.id.Image);
         int relPos = position + 1;
         int id = getResources().getIdentifier("p" + relPos, "mipmap", getPackageName());
@@ -92,7 +101,38 @@ public class Powerup extends AppCompatActivity {
         LinLayoutlev.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL);
         Button plus = (Button)findViewById(R.id.buttonUp);
         Button minus = (Button)findViewById(R.id.buttonDown);
+        TextView trainlev = (TextView)findViewById(R.id.TrainerLevel);
+        TextView maxcp = (TextView)findViewById(R.id.maxcp);
+        TextView Currcp = (TextView)findViewById(R.id.currCp);
+        TextView maxcpplace = (TextView)findViewById(R.id.maxcpplace);
+        TextView levcapplace = (TextView)findViewById(R.id.levcapplace);
+        TextView perlevplace = (TextView)findViewById(R.id.perlevplace);
+
+        trainlev.setTextColor(TextCol);
+        maxcp.setTextColor(TextCol);
+        Currcp.setTextColor(TextCol);
+        maxcpplace.setTextColor(TextCol);
+        levcapplace.setTextColor(TextCol);
+        perlevplace.setTextColor(TextCol);
+        trainlev.setAlpha(0.7f);
+        trainlev.setAlpha(0.7f);
+        Currcp.setAlpha(0.7f);
+        maxcpplace.setAlpha(0.7f);
+        levcapplace.setAlpha(0.7f);
+        perlevplace.setAlpha(0.7f);
+
+        GradientDrawable drawable = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP,new int[]{SecCol,SecCol});
+        drawable.setShape(GradientDrawable.OVAL);
+        plus.setBackground(drawable);
+        minus.setBackground(drawable);
+        plus.setTextColor(TextCol);
+        minus.setTextColor(TextCol);
+        plus.setPadding(5,2,5,7);
+        minus.setPadding(5,2,5,9);
+
+
         final EditText levelval = (EditText)findViewById(R.id.levelValue);
+        levelval.setTextColor(TextCol);
         levelval.setText(String.valueOf(Level));
         plus.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -122,15 +162,24 @@ public class Powerup extends AppCompatActivity {
 
         TextView maxCpVal = (TextView)findViewById(R.id.maxcpval);
         maxCpVal.setText(String.valueOf(maxCP));
+        maxCpVal.setTextColor(TextCol);
 
         TextView levelCap = (TextView)findViewById(R.id.levcapval);
+        levelCap.setTextColor(TextCol);
         long capVal = Math.round(LevelCap * maxCP);
         levelCap.setText(String.valueOf(capVal));
+        levcapplace.setTextColor(TextCol);
 
         TextView cpperlevelcval = (TextView)findViewById(R.id.perlevval);
+        cpperlevelcval.setTextColor(TextCol);
         cpperlevelcval.setText(String.valueOf(cpPerlevelup));
 
         final EditText CPval = (EditText)findViewById(R.id.cpVal);
+        GradientDrawable draw = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP,new int[]{SecCol,SecCol});
+        draw.setCornerRadius(5);
+        CPval.setBackground(draw);
+        CPval.setTextColor(TextCol);
+        CPval.setPadding(0,2,0,2);
         String Cpvalue = CPval.getText().toString();
         final Integer CPVal = Integer.parseInt(Cpvalue);
 

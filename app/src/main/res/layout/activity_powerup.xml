@@ -7,8 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/power"
     tools:context="com.anshul.pokemongopokedex.Powerup"
-    android:background="#354AA5"
     android:clipChildren="true">
 
     <ScrollView
@@ -52,7 +52,6 @@
                 android:id="@+id/maxcp"
                 android:gravity="center"
                 android:textSize="10dp"
-                android:textColor="#ffffff"
                 android:layout_below="@+id/progressBarCP"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="1dp"
@@ -67,7 +66,7 @@
         android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/Image"
-        android:textColor="#C1FFFFFF" />
+         />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -84,7 +83,6 @@
             android:textSize="50dp"
             android:layout_margin="20dp"
             android:id="@+id/buttonDown"
-            android:background="@drawable/circle"
             android:textColor="#FFFFFFFF"
             />
 
@@ -96,7 +94,6 @@
             android:layout_marginTop="10dp"
             android:layout_margin="20dp"
             android:layout_centerHorizontal="true"
-            android:textColor="#FFFFFFFF"
             android:textAlignment="gravity"
             android:gravity="center"
             android:cursorVisible="false"
@@ -111,7 +108,6 @@
             android:textSize="50dp"
             android:layout_margin="20dp"
             android:id="@+id/buttonUp"
-            android:background="@drawable/circle"
             android:textColor="#FFFFFFFF" />
 
     </LinearLayout>
@@ -124,8 +120,7 @@
         android:layout_below="@+id/setLevel"
         android:layout_centerHorizontal="true"
         android:textSize="25dp"
-        android:layout_marginTop="10dp"
-        android:textColor="#C1FFFFFF" />
+        android:layout_marginTop="10dp" />
 
     <EditText
         android:layout_width="600dp"
@@ -138,11 +133,9 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:textColor="#FFFFFFFF"
         android:textAlignment="gravity"
         android:gravity="center"
         android:cursorVisible="false"
-        android:background="@drawable/cpval"
         android:inputType="number"/>
 
     <LinearLayout
@@ -150,9 +143,9 @@
         android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:id="@+id/info"
         android:layout_below="@+id/cpVal"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/cpval">
+        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -169,8 +162,7 @@
                 android:layout_centerHorizontal="true"
                 android:textSize="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:textColor="#C1FFFFFF" />
+                android:layout_marginLeft="10dp" />
 
 
             <TextView
@@ -181,8 +173,7 @@
                 android:layout_centerHorizontal="true"
                 android:textSize="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:textColor="#FFFFFFFF" />
+                android:layout_marginLeft="10dp" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -200,8 +191,7 @@
                 android:layout_centerHorizontal="true"
                 android:textSize="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:textColor="#C1FFFFFF" />
+                android:layout_marginLeft="10dp" />
 
 
             <TextView
@@ -212,8 +202,7 @@
                 android:layout_centerHorizontal="true"
                 android:textSize="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:textColor="#FFFFFFFF" />
+                android:layout_marginLeft="10dp" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -231,8 +220,7 @@
                 android:layout_centerHorizontal="true"
                 android:textSize="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:textColor="#C1FFFFFF" />
+                android:layout_marginLeft="10dp" />
 
 
             <TextView
@@ -243,8 +231,7 @@
                 android:layout_centerHorizontal="true"
                 android:textSize="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:textColor="#FFFFFFFF" />
+                android:layout_marginLeft="10dp" />
         </LinearLayout>
 
     </LinearLayout>

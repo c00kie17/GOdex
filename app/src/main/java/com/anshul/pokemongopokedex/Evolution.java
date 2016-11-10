@@ -1,6 +1,8 @@
 package com.anshul.pokemongopokedex;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -28,11 +31,12 @@ public class Evolution extends AppCompatActivity {
     public String evolName;
     public Integer evolPos;
     public String name;
-    public JSONObject pokeDetail1;
-    public JSONObject pokeDetail2;
     public Integer maxCP1;
     public Integer maxCP2;
     public double multiplier;
+    public Integer PriCol;
+    public Integer SecCol;
+    public Integer TextCol;
     Context context = this;
 
 
@@ -46,10 +50,13 @@ public class Evolution extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         final int position = extras.getInt("MyData");
 
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
+        RelativeLayout mainlay = (RelativeLayout)findViewById(R.id.evolShell);
+
         try{
-            JSONArray obj = new JSONArray(loadJSONFromAsset("pokemon.json"));
+            JSONArray obj = new JSONArray(loadJSONFromAsset("Poke.json"));
             pokemonInfo = obj.getJSONObject(position);
             name  = pokemonInfo.getString("Name");
             JSONArray nextevoldata = pokemonInfo.getJSONArray("Next evolution(s)");
@@ -58,29 +65,15 @@ public class Evolution extends AppCompatActivity {
                 evolName = value.getString("Name");
                 evolPos = value.getInt("Number");
             }
-            JSONArray obj1 = new JSONArray(loadJSONFromAsset("pokejson2.json"));
-            for(int i=0;i<obj1.length();i++){
-                JSONObject insideObj = obj1.getJSONObject(i);
-                if(insideObj.getInt("PkMn") == position+1){
-                    pokeDetail1 = insideObj;
-                }
-            }
-            maxCP1 = pokeDetail1.getInt("MaxCP");
-            for(int i=0;i<obj1.length();i++){
-                JSONObject insideObj = obj1.getJSONObject(i);
-                if(insideObj.getInt("PkMn") == evolPos){
-                    pokeDetail2 = insideObj;
-                }
-            }
-            maxCP2 = pokeDetail2.getInt("MaxCP");
-            JSONArray obj2 = new JSONArray(loadJSONFromAsset("multiplier.json"));
-            for(int i=0;i<obj2.length();i++){
-                JSONObject insideObj = obj2.getJSONObject(i);
-                if(insideObj.getInt("pokemon") == position+1){
-                    pokeMul = insideObj;
-                }
-            }
-            multiplier = pokeMul.getDouble("multiplier");
+            maxCP1 = pokemonInfo.getInt("MaxCP");
+            maxCP2 = pokemonInfo.getInt("MaxCP");
+            multiplier = pokemonInfo.getDouble("multiplier");
+            String PriCols = pokemonInfo.getString("primaryColor");
+            PriCol = Color.parseColor(PriCols);
+            String SecCols = pokemonInfo.getString("secondaryColor");
+            SecCol = Color.parseColor(SecCols);
+            String TextCols = pokemonInfo.getString("textColor");
+            TextCol = Color.parseColor(TextCols);
 
 
 
@@ -88,12 +81,21 @@ public class Evolution extends AppCompatActivity {
         catch (JSONException e) {
             e.printStackTrace();
         }
+        mainlay.setBackgroundColor(PriCol);
 
+        TextView enc =(TextView)findViewById(R.id.Cppointshead);
+        TextView mxc =(TextView)findViewById(R.id.maxcp);
+        mxc.setTextColor(TextCol);
+        enc.setTextColor(TextCol);
+        mxc.setAlpha(0.7f);
+        enc.setAlpha(0.7f);
 
         TextView name1 =(TextView)findViewById(R.id.pokeName1);
+        name1.setTextColor(TextCol);
         name1.setText(name);
         TextView name2 =(TextView)findViewById(R.id.pokeName2);
         name2.setText(evolName);
+        name2.setTextColor(TextCol);
 
         ImageView gifImage1 = (ImageView) findViewById(R.id.gifImage1);
         int relPos = position + 1;
@@ -106,7 +108,12 @@ public class Evolution extends AppCompatActivity {
 
 
         final EditText CPval = (EditText)findViewById(R.id.cpVallay);
+        GradientDrawable draw = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP,new int[]{SecCol,SecCol});
+        draw.setCornerRadius(5);
+        CPval.setBackground(draw);
 
+        CPval.setPadding(0,2,0,2);
+        CPval.setTextColor(TextCol);
 
         ProgressBar prog1 = (ProgressBar)findViewById(R.id.progressBar1);
         ProgressBar prog2 = (ProgressBar)findViewById(R.id.progressBar2);
@@ -143,6 +150,7 @@ public class Evolution extends AppCompatActivity {
                 double prog2val = Cpvalue * multiplier;
                 prog1.setProgress((int)prog2val);
                 TextView twoVal = (TextView)findViewById(R.id.pokeevolcp);
+                twoVal.setTextColor(TextCol);
                 twoVal.setText(String.valueOf(Math.round(prog2val)));
 
 

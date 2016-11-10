@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.anshul.pokemongopokedex.eevelution"
-    android:background="#354AA5">
+    android:id="@+id/mainshell">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -26,8 +26,7 @@
         android:text="Enter Combat Points"
         android:id="@+id/Cppointshead"
         android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:textColor="#C1FFFFFF" />
+        android:layout_centerHorizontal="true" />
 
 
     <EditText
@@ -39,11 +38,9 @@
         android:layout_below="@+id/Cppointshead"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:textColor="#FFFFFFFF"
         android:textAlignment="gravity"
         android:gravity="center"
         android:cursorVisible="false"
-        android:background="@drawable/cpval"
         android:inputType="number"/>
 
 
@@ -92,7 +89,6 @@
         android:id="@+id/maxcp"
         android:gravity="center"
         android:textSize="10dp"
-        android:textColor="#ffffff"
         android:layout_below="@+id/progressBar2"
         android:layout_alignParentRight="true"
         android:layout_marginTop="1dp"
@@ -163,7 +159,6 @@
         android:id="@+id/pokeevolcp"
         android:gravity="center"
         android:textSize="20dp"
-        android:textColor="#ffffff"
         android:layout_below="@+id/evolImagaLay"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"

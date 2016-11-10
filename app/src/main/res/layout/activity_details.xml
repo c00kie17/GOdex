@@ -8,8 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.anshul.pokemongopokedex.details"
-    android:background="#354AA5">
+    tools:context="com.anshul.pokemongopokedex.details">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -30,17 +29,16 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:gravity="center"
-        android:textSize="30dp"
-        android:textColor="#ffffff"/>
+        android:textSize="30dp" />
 
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:paddingTop="30dp"
+        android:paddingTop="10dp"
         android:id="@+id/gifImage"
         android:layout_below="@+id/pokeName"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -48,7 +46,6 @@
         android:text="New Text"
         android:paddingTop="5dp"
         android:id="@+id/pokeId"
-        android:textColor="#ffffff"
         android:layout_below="@+id/pokeName"
         android:layout_centerHorizontal="true" />
 
@@ -58,11 +55,9 @@
         android:text="New Text"
         android:id="@+id/pokeType"
         android:layout_marginTop="7dp"
-        android:textColor="#ffffff"
         android:textSize="15dp"
         android:layout_below="@+id/gifImage"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/round"
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
         android:paddingLeft="7dp"
@@ -78,7 +73,6 @@
         android:layout_marginTop="32dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/attribute"
-        android:textColor="#C1FFFFFF"
         />
 
     <LinearLayout
@@ -109,8 +103,7 @@
         android:id="@+id/attacks"
         android:layout_marginTop="32dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/weak"
-        android:textColor="#C1FFFFFF" />
+        android:layout_below="@+id/weak" />
 
             <LinearLayout
         android:orientation="vertical"
@@ -130,8 +123,7 @@
                 android:id="@+id/CC"
                 android:layout_marginTop="5dp"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/attacktext"
-                android:textColor="#C1FFFFFF" />
+                android:layout_below="@+id/attacktext" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -150,8 +142,7 @@
                 android:id="@+id/FC"
                 android:layout_marginTop="5dp"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/capc"
-                android:textColor="#C1FFFFFF" />
+                android:layout_below="@+id/capc" />
 
 
             <LinearLayout
@@ -165,16 +156,28 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/fleec"
+                android:layout_below="@+id/egg"
                 android:layout_marginTop="15dp"
                 android:id="@+id/evol"></LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/fleec"
+                android:layout_marginTop="15dp"
+                android:id="@+id/egg">
+
+
+            </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/evol"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:id="@+id/calc">
 
 

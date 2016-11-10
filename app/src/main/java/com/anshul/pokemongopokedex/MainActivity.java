@@ -1,14 +1,21 @@
 package com.anshul.pokemongopokedex;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -42,14 +49,34 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        SharedPreferences settings = getSharedPreferences("alert", Activity.MODE_PRIVATE);
+        Boolean alert = settings.getBoolean("alert",false);
+        if(alert == false){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("                    Notice");
+            builder.setMessage("PokemonGO,Pokemon, Nintendo,Niantic,and character names or imagery are trademarks or registered trademarks of their respective holders. Use of such trademarks does not imply any affiliation with or endorsements by mark holders ");
+            builder.setPositiveButton("OK", null);
+            AlertDialog dialog = builder.show();
+            TextView messageText = (TextView)dialog.findViewById(android.R.id.message);
+            messageText.setGravity(Gravity.CENTER);
+            SharedPreferences val = getSharedPreferences("alert", Activity.MODE_PRIVATE);
+            SharedPreferences.Editor editor = val.edit();
+            editor.putBoolean("alert", true);
+            editor.commit();
+
+        }
+
+
         getSupportActionBar().hide();
 
         final InputMethodManager imm = (InputMethodManager)this.getSystemService(Service.INPUT_METHOD_SERVICE);
         try{
-            JSONArray obj = new JSONArray(loadJSONFromAsset("pokemon.json"));
+            JSONArray obj = new JSONArray(loadJSONFromAsset("Poke.json"));
             for(int i=0;i<obj.length();i++){
                 JSONObject pokemonInfo = obj.getJSONObject(i);
-                pokes.add(new Data(pokemonInfo.getString("Name"),pokemonInfo.getInt("Number")));
+                pokes.add(new Data(pokemonInfo.getString("Name"),pokemonInfo.getInt("number")));
 
             }
 
@@ -57,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         catch (JSONException e) {
             e.printStackTrace();
         }
+
 
         final SearchView search = (SearchView)findViewById(R.id.searchView);
         GridView gridview = (GridView) findViewById(R.id.gridview);

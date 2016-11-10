@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.anshul.pokemongopokedex.attacks"
+    android:id="@+id/main">
+
+    <ImageView
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:paddingTop="10dp"
+        android:id="@+id/pokeimg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Fast Attack(s)"
+        android:id="@+id/att"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/pokeimg" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/fa"
+        android:layout_below="@+id/att"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true">
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Charge Attack(s)"
+        android:id="@+id/chatt"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/fa" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/ca"
+        android:layout_below="@+id/chatt"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true">
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Select Your Opponent"
+        android:id="@+id/opo"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ca" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text=""
+        android:id="@+id/opoval"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/opo" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/efecprog"
+        android:layout_below="@+id/opoval"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"/>
+
+
+
+
+</RelativeLayout>
