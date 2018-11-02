@@ -1,4 +1,4 @@
-# GoDex
+# GOdex
 
 An android companion app for the game "Pokemon GO"
 
@@ -8,6 +8,8 @@ You can download the app [here](https://play.google.com/store/apps/details?id=co
 
 ## Screenshots
 
+[](https://user-images.githubusercontent.com/10531093/47908598-8e237200-deb3-11e8-9b78-15edbaf0cdd8.jpeg
+[](https://user-images.githubusercontent.com/10531093/47908643-a1ced880-deb3-11e8-8291-01614f5e2154.jpeg)
 
 ## Author
 
